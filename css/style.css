@@ -1,0 +1,434 @@
+/* Miama Nueva — © 2014 Linus Romer, SIL Open Font License 1.1 (текст лицензии — внутри файла шрифта).
+   Файл отдаётся как есть, без перекодирования: имя шрифта зарезервировано автором. */
+@font-face {
+  font-family: 'Miama Nueva';
+  src: url('../fonts/miamanueva.otf') format('opentype');
+  font-display: swap;
+}
+
+:root {
+  --wine: #5A0F1C;
+  --wine-deep: #2A070D;
+  --cream: #F3E9DC;
+  --flame: #F0762A;
+  --ember: #B4470F;
+  --blush: #E59A8C;
+  --dusk: #55607A;
+  --glow: #FFD9B8;
+
+  --f-script: 'Miama Nueva', cursive;
+  --f-names: 'Cormorant Garamond', 'Times New Roman', serif;
+  --f-text: 'Montserrat', system-ui, sans-serif;
+
+  --col: 480px;
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .1 0 0 0 0 .1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--f-text);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream);
+  background: var(--wine-deep);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.is-sealed, .is-sealed body { overflow: hidden; height: 100%; }
+
+button { font: inherit; color: inherit; }
+
+:focus-visible { outline: 2px solid var(--flame); outline-offset: 3px; }
+
+.sr {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+
+/* Росчерк: имена и заголовки блоков */
+.script { font-family: var(--f-script); font-weight: 400; font-size: var(--fs); }
+
+/* ───────── Небо: фон всей страницы, цвет ведёт main.js по скроллу ───────── */
+
+.sky {
+  position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: 0;
+  background: linear-gradient(180deg, var(--sky-top, #6F7C97) 0%, var(--sky-mid, #C9A29A) 58%, var(--sky-low, #F0B48C) 100%);
+}
+.sky__sun {
+  position: absolute; left: 50%; bottom: -24vh; width: 150vmax; height: 76vh;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(255, 196, 140, .8), rgba(240, 118, 42, .22) 48%, transparent 72%);
+  opacity: var(--sun, 1);
+}
+.sky__stars { position: absolute; inset: 0; opacity: var(--stars, 0); }
+.sky__stars i {
+  position: absolute; width: 2px; height: 2px; border-radius: 50%;
+  background: #FFF1DD; animation: twinkle 4s ease-in-out infinite;
+}
+
+.sparks {
+  position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh;
+  z-index: 0; pointer-events: none;
+}
+
+.page { position: relative; z-index: 1; max-width: var(--col); margin: 0 auto; overflow-x: clip; }
+
+/* ───────── Конверт ───────── */
+
+.env {
+  position: fixed; inset: 0; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
+  padding: 24px;
+  background: radial-gradient(120% 90% at 50% 42%, #6E1424 0%, #4A0B16 55%, var(--wine-deep) 100%);
+  transition: opacity .9s ease, transform 1.3s cubic-bezier(.6, 0, .3, 1), visibility 0s linear 1.3s;
+}
+.env::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--grain); opacity: .5; mix-blend-mode: multiply; pointer-events: none;
+}
+.env.is-open { opacity: 0; transform: scale(1.3); visibility: hidden; pointer-events: none; }
+
+.env__to {
+  position: relative;
+  --fs: min(10.5vw, 44px); line-height: 1.1; white-space: nowrap; max-width: 100%;
+  color: var(--glow);
+  transition: opacity .5s ease;
+}
+
+.env__body {
+  position: relative; width: min(84vw, 340px); aspect-ratio: 1.48;
+  border: 0; padding: 0; background: none; cursor: pointer;
+  perspective: 900px; -webkit-tap-highlight-color: transparent;
+}
+.env__back, .env__front, .env__flap, .env__letter { position: absolute; display: block; }
+.env__back {
+  inset: 0; border-radius: 6px; background: #3A0810;
+  box-shadow: 0 34px 60px -22px rgba(0, 0, 0, .7);
+}
+.env__letter {
+  left: 6%; right: 6%; top: 7%; bottom: 6%; z-index: 1;
+  border-radius: 3px; background: var(--cream); color: var(--wine);
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px;
+  padding-top: 9%;
+  transition: transform .9s cubic-bezier(.3, .8, .3, 1) .8s;
+}
+.env__names { --fs: min(7vw, 28px); line-height: 1.1; }
+.env__date { font-size: 12px; letter-spacing: .24em; }
+.env__front {
+  inset: 0; z-index: 2; border-radius: 6px;
+  background: linear-gradient(90deg, #4E0D19, #63111F 50%, #4E0D19);
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+.env__front::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(0deg, #4A0C17, #6A1423);
+  clip-path: polygon(0 100%, 50% 45%, 100% 100%);
+}
+.env__flap {
+  left: 0; right: 0; top: 0; height: 61%; z-index: 3;
+  transform-origin: 50% 0;
+  filter: drop-shadow(0 5px 7px rgba(0, 0, 0, .4));
+  transition: transform .8s cubic-bezier(.5, 0, .3, 1) .25s, z-index 0s linear .65s;
+}
+.env__flap i {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #7C1929, #5E1220);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.env__seal {
+  position: absolute; left: 50%; top: 61%; z-index: 4;
+  width: 76px; height: 76px; margin: -40px 0 0 -38px;
+  display: grid; place-items: center;
+  border-radius: 47% 53% 51% 49% / 52% 47% 53% 48%;
+  --fs: 20px; line-height: 1; color: #7A2A08;
+  text-shadow: 0 1px 0 rgba(255, 200, 150, .5);
+  background: radial-gradient(circle at 36% 30%, #FFB272, var(--flame) 46%, #C4501A 78%, #9C3A10);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, .5), inset 0 0 0 6px rgba(255, 255, 255, .09), inset 0 -5px 9px rgba(120, 40, 0, .5);
+  animation: seal 2.6s ease-in-out infinite;
+  transition: transform .45s cubic-bezier(.5, -.4, .7, 1), opacity .3s ease .15s;
+}
+
+.env__hint {
+  position: relative;
+  font-size: 15px; letter-spacing: .04em; opacity: .9;
+  transition: opacity .4s ease;
+}
+.env__lang { position: relative; display: flex; gap: 6px; transition: opacity .4s ease; }
+.env__lang button {
+  min-height: 40px; padding: 0 18px; border-radius: 999px; cursor: pointer;
+  border: 1px solid rgba(243, 233, 220, .35); background: none;
+  font-size: 14px; letter-spacing: .03em;
+}
+.env__lang button[aria-pressed="true"] { background: var(--cream); color: var(--wine); border-color: var(--cream); }
+
+.env.is-opening .env__seal { transform: scale(.35) rotate(-24deg); opacity: 0; animation: none; }
+.env.is-opening .env__flap { transform: rotateX(180deg); z-index: 0; }
+.env.is-opening .env__letter { transform: translateY(-56%); }
+.env.is-opening .env__hint,
+.env.is-opening .env__lang,
+.env.is-opening .env__to { opacity: 0; }
+
+/* ───────── Кнопки поверх страницы ───────── */
+
+.chrome {
+  position: fixed; top: 0; left: 50%; z-index: 5;
+  width: min(100%, var(--col)); transform: translateX(-50%);
+  display: flex; padding: max(14px, env(safe-area-inset-top)) 14px 0;
+  pointer-events: none; opacity: 0; transition: opacity .8s ease 1.2s;
+}
+.is-open .chrome { opacity: 1; }
+.pill {
+  pointer-events: auto;
+  display: flex; align-items: center; height: 38px; border-radius: 999px;
+  border: 1px solid rgba(243, 233, 220, .38);
+  background: rgba(42, 7, 13, .5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+}
+.pill[hidden] { display: none; }
+.pill--music { width: 38px; justify-content: center; cursor: pointer; }
+.pill--lang { margin-left: auto; padding: 3px; gap: 2px; }
+.pill--lang button {
+  height: 30px; min-width: 40px; border: 0; border-radius: 999px; background: none; cursor: pointer;
+  font-size: 11px; font-weight: 400; letter-spacing: .12em;
+}
+.pill--lang button[aria-pressed="true"] { background: var(--cream); color: var(--wine); }
+
+.bars { display: flex; align-items: flex-end; gap: 3px; height: 14px; }
+.bars i { width: 2px; height: 4px; background: var(--cream); border-radius: 1px; }
+.pill--music[aria-pressed="true"] .bars i { animation: bars .9s ease-in-out infinite alternate; }
+.pill--music[aria-pressed="true"] .bars i:nth-child(2) { animation-delay: -.3s; }
+.pill--music[aria-pressed="true"] .bars i:nth-child(3) { animation-delay: -.6s; }
+
+/* ───────── Заглавный экран ───────── */
+
+.hero {
+  position: relative; height: 100vh; height: 100svh;
+  /* не ниже полного кадра 9:16 (+28px подъёма, см. LIFT в main.js): имена остаются в небе над головами */
+  min-height: calc(min(100vw, var(--col)) * 1.7778 + 28px);
+  overflow: hidden; isolation: isolate; background: #1F0509;
+}
+.hero__plate {
+  position: absolute; inset: 0;
+  transform-origin: 52% 58%;
+  animation: drift 26s ease-in-out infinite alternate;
+}
+.hero__plate img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero__glints { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero__flame {
+  position: absolute; left: 88.6%; top: 95.6%; width: 22%; height: 20%;
+  transform: translate(-50%, -100%); pointer-events: none;
+}
+.hero__glow {
+  position: absolute; left: 88%; top: 90%; width: 70%; aspect-ratio: 1;
+  transform: translate(-50%, -50%); pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255, 150, 60, .38), rgba(240, 118, 42, .12) 50%, transparent);
+  animation: flick 2.8s ease-in-out infinite;
+}
+.hero__veil {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(42, 7, 13, .5) 0%, rgba(42, 7, 13, 0) 36%),
+    linear-gradient(0deg, #1F0509 0%, rgba(31, 5, 9, .78) 5%, rgba(31, 5, 9, 0) 27%);
+}
+.hero__veil::after {
+  content: ''; position: absolute; inset: 0;
+  background: var(--grain); opacity: .22; mix-blend-mode: overlay;
+}
+
+.hero__text { position: absolute; left: 0; right: 0; top: max(6.5vh, 48px); text-align: center; }
+.kicker { font-size: 15px; letter-spacing: .1em; }
+/* Имена по диагонали, за ними большой росчерк «&» (приём сайта-образца) */
+.names {
+  position: relative; isolation: isolate; margin-top: 10px;
+  --fs: min(15.5vw, 72px); line-height: 1;
+  text-shadow: 0 2px 30px rgba(42, 7, 13, .5);
+}
+.names span { display: block; width: max-content; padding: .02em .2em; }
+.names__a { margin-left: 6%; }
+.names__b { margin-left: auto; margin-right: 6%; }
+.names .names__amp {
+  position: absolute; left: 50%; top: 56%; z-index: -1; padding: 0;
+  font-size: 2.1em; line-height: 1; color: var(--glow); opacity: .32;
+  transform: translate(-50%, -50%);
+}
+.hero__foot { position: absolute; left: 0; right: 0; bottom: 62px; text-align: center; }
+.hero__date { padding-left: .28em; font-size: 18px; letter-spacing: .28em; }
+.hero__cue { margin-top: 16px; font-size: 14px; letter-spacing: .08em; }
+.cue__line {
+  display: block; width: 1px; height: 36px; margin: 0 auto 10px;
+  background: linear-gradient(var(--cream), transparent);
+  transform-origin: top; animation: cue 2.4s ease-in-out infinite;
+}
+
+/* Появление после открытия конверта: имена «прописываются» слева направо */
+.js .hero__text > *, .js .hero__foot > * { opacity: 0; transform: translateY(14px); }
+/* поля с запасом: росчерки Miama далеко выходят за рамку буквы */
+.js .names span { clip-path: inset(-45% 130% -45% -30%); }
+/* «&» не режем clip-path: росчерк выходит далеко за свою рамку */
+.js .names .names__amp { clip-path: none; opacity: 0; }
+.is-open .hero__text > *, .is-open .hero__foot > * {
+  opacity: 1; transform: none;
+  transition: opacity 1.2s ease .2s, transform 1.2s cubic-bezier(.2, .7, .2, 1) .2s;
+}
+.is-open .names span { clip-path: inset(-45% -40% -45% -30%); transition: clip-path 1.5s cubic-bezier(.4, 0, .2, 1) .5s; }
+.is-open .names .names__b { transition-delay: 1s; }
+.is-open .names .names__amp { opacity: .36; transition: opacity 2.2s ease 1.2s; }
+.is-open .hero__date { transition-delay: 2.3s; }
+.is-open .hero__cue { transition-delay: 3s; }
+
+/* ───────── Листы (кремовая бумага с краем-тканью) ───────── */
+
+.paper {
+  position: relative; z-index: 1; text-align: center;
+  padding: 50px 30px 56px;
+  background: var(--cream); color: var(--wine);
+}
+.paper::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--grain); opacity: .16; mix-blend-mode: multiply; pointer-events: none;
+}
+.paper > * { position: relative; }
+
+.drape { position: absolute; left: -5%; width: 110%; height: 56px; display: block; pointer-events: none; overflow: visible; }
+.paper > .drape { position: absolute; }
+.drape--top { bottom: calc(100% - 1px); }
+.drape--bottom { top: calc(100% - 1px); transform: scaleY(-1); }
+.drape path { fill: var(--cream); }
+.drape .veil { fill: #fff; opacity: .4; animation: sway 9s ease-in-out infinite alternate; }
+.drape .veil--2 { opacity: .22; animation-duration: 13s; animation-direction: alternate-reverse; }
+
+.eyebrow { font-size: 21px; line-height: 1.35; }
+.body { max-width: 30ch; margin: 16px auto 0; text-wrap: balance; }
+.sign { margin-top: 30px; font-size: 15px; font-weight: 400; letter-spacing: .04em; color: var(--ember); }
+/* у Miama высокие выносные: строкам росчерка нужен воздух сверху и снизу */
+.couple { --fs: min(12.5vw, 54px); margin-top: 22px; line-height: 1.1; }
+.couple span { display: block; }
+.couple .couple__and { margin: 20px 0 16px; font-family: var(--f-text); font-size: 17px; line-height: 1; }
+
+.title { --fs: min(10.5vw, 46px); line-height: 1.15; white-space: nowrap; }
+
+/* ───────── Фото в арках ───────── */
+
+.photos { padding: 110px 26px 40px; }
+.arch { position: relative; margin: 0 auto; }
+.arch img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.arch::after {
+  content: ''; position: absolute; inset: -9px; pointer-events: none;
+  border: 1px solid rgba(243, 233, 220, .7); border-radius: inherit;
+}
+.arch--main { width: 80%; aspect-ratio: 3 / 4.1; border-radius: 50% 50% 0 0 / 36.6% 36.6% 0 0; }
+.arch--main img { object-position: 50% 62%; }
+.photos__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 52px; padding: 0 6px; }
+.arch--s { width: 100%; aspect-ratio: 3 / 4.6; border-radius: 50% 50% 0 0 / 32.6% 32.6% 0 0; }
+.arch--low { margin-top: 56px; }
+.pos-knee { object-position: 42% 92%; }
+.pos-embrace { object-position: 38% 96%; }
+
+/* ───────── Дата ───────── */
+
+.date { padding: 70px 24px 120px; text-align: center; }
+.date__num {
+  margin-top: 4px;
+  font-weight: 200; font-size: min(40vw, 180px); line-height: 1; letter-spacing: -.03em;
+  color: var(--glow);
+}
+.date__line { font-size: 20px; letter-spacing: .02em; }
+.date__time { margin-top: 6px; font-size: 16px; color: var(--glow); }
+
+.cal { max-width: 318px; margin: 46px auto 0; }
+.cal__month {
+  padding: 0 0 10px .34em; margin-bottom: 12px;
+  font-size: 18px; letter-spacing: .34em; text-transform: uppercase;
+  border-bottom: 1px solid rgba(243, 233, 220, .35);
+}
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 5px; font-size: 17px; }
+.cal__dow { padding-bottom: 6px; font-size: 12px; opacity: .75; }
+.cal__day { position: relative; height: 38px; display: grid; place-items: center; }
+.cal__day--the { color: #fff; }
+.cal__heart { position: absolute; left: 50%; top: 50%; width: 52px; height: 47px; margin: -22px 0 0 -26px; overflow: visible; }
+.cal__heart path {
+  fill: rgba(240, 118, 42, .16); stroke: var(--flame); stroke-width: 2.4; stroke-linecap: round;
+  stroke-dasharray: 1; stroke-dashoffset: 1; fill-opacity: 0;
+  transition: stroke-dashoffset 1.6s cubic-bezier(.5, 0, .3, 1) .5s, fill-opacity .8s ease 1.9s;
+}
+.cal.is-in .cal__heart path { stroke-dashoffset: 0; fill-opacity: 1; }
+.cal__day--the b { position: relative; font-weight: 400; }
+
+/* ───────── Место ───────── */
+
+.place { padding-top: 40px; padding-bottom: 50px; }
+.venue { margin-top: 22px; font-family: var(--f-names); font-weight: 400; font-size: min(12.5vw, 54px); line-height: 1.1; }
+.kind { font-size: 15px; letter-spacing: .08em; color: var(--ember); font-weight: 400; }
+.addr { margin-top: 14px; text-wrap: balance; }
+.btn {
+  display: inline-block; margin-top: 26px; padding: 14px 32px; border-radius: 999px;
+  background: var(--wine); color: var(--cream); text-decoration: none;
+  font-size: 16px; font-weight: 400; letter-spacing: .04em;
+}
+.btn:active { background: var(--wine-deep); }
+
+/* ───────── Дресс-код: здесь небо уходит в чёрный (см. SKY в main.js) ───────── */
+
+.dress { padding: 150px 30px 130px; text-align: center; }
+.dress__text { max-width: 30ch; margin: 22px auto 0; text-wrap: balance; }
+.swatches { display: flex; justify-content: center; gap: 30px; margin-top: 38px; }
+.swatch__chip { width: 104px; height: 132px; border-radius: 50% 50% 0 0 / 39.4% 39.4% 0 0; }
+.swatch--black .swatch__chip {
+  background: linear-gradient(128deg, #2E2828 0%, #0A0808 38%, #221D1D 58%, #050404 100%);
+  box-shadow: inset 0 0 0 1px rgba(243, 233, 220, .32);
+}
+.swatch--orange .swatch__chip {
+  background: linear-gradient(128deg, #FFA35A 0%, var(--flame) 45%, #C9541C 100%);
+  box-shadow: 0 0 46px rgba(240, 118, 42, .5);
+}
+.swatch__name { margin-top: 12px; font-size: 14px; letter-spacing: .04em; }
+
+/* ───────── Отсчёт: ночь и зарево снизу, как от огня за кадром ───────── */
+
+.count {
+  position: relative; isolation: isolate; overflow: hidden; min-height: 100vh; min-height: 100svh; padding: 80px 20px 130px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+}
+.timer { display: grid; grid-template-columns: repeat(4, 1fr); width: 100%; max-width: 360px; margin-top: 30px; }
+.timer__cell + .timer__cell { border-left: 1px solid rgba(243, 233, 220, .2); }
+.timer b { display: block; font-weight: 200; font-size: min(12.5vw, 56px); line-height: 1.15; color: var(--glow); font-variant-numeric: tabular-nums; }
+.timer b i { display: inline-block; width: .64em; font-style: normal; text-align: center; }
+.timer span { font-size: 13px; opacity: .8; }
+.bye { white-space: nowrap; --fs: min(11vw, 48px); margin-top: 50px; line-height: 1.1; color: var(--glow); }
+.count__names { --fs: min(7.5vw, 32px); margin-top: 30px; }
+.count .title, .count .bye { align-self: stretch; }
+
+.count__glow {
+  position: absolute; left: 50%; bottom: 0; z-index: -1; width: 150%; height: 46%;
+  transform: translate(-50%, 50%); pointer-events: none;
+  background: radial-gradient(closest-side, rgba(240, 118, 42, .42), rgba(240, 118, 42, .14) 52%, transparent 74%);
+  animation: flick 2.8s ease-in-out infinite;
+}
+
+/* ───────── Появление блоков ───────── */
+
+.js [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity 1s ease, transform 1s cubic-bezier(.2, .7, .2, 1); }
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* ───────── Десктоп: колонка-письмо по центру ───────── */
+
+@media (min-width: 620px) {
+  .page { box-shadow: 0 0 140px rgba(20, 3, 6, .45); }
+}
+
+@keyframes drift { from { transform: scale(1); } to { transform: scale(1.06); } }
+@keyframes cue { 0%, 100% { transform: scaleY(.35); opacity: .5; } 50% { transform: scaleY(1); opacity: 1; } }
+@keyframes sway { from { transform: translateX(-3%); } to { transform: translateX(3%); } }
+@keyframes flick { 0%, 100% { opacity: .85; } 22% { opacity: 1; } 41% { opacity: .7; } 63% { opacity: .95; } 80% { opacity: .78; } }
+@keyframes twinkle { 0%, 100% { opacity: .9; } 50% { opacity: .25; } }
+@keyframes seal { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+@keyframes bars { from { height: 3px; } to { height: 14px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}

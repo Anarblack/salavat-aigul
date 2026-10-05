@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ky">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Салават &amp; Айгуль · 20.10.2026</title>
+<meta name="description" content="Сизди үйлөнүү тоюбузга чакырабыз · Приглашаем вас на нашу свадьбу">
+<meta name="theme-color" content="#5A0F1C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Салават &amp; Айгуль · 20.10.2026">
+<meta property="og:description" content="Сизди үйлөнүү тоюбузга чакырабыз · Приглашаем вас на нашу свадьбу">
+<meta property="og:url" content="https://anarblack.github.io/salavat-aigul/">
+<meta property="og:image" content="https://anarblack.github.io/salavat-aigul/img/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/miamanueva.otf" as="font" type="font/otf" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.className = 'js is-sealed';</script>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <div class="sky__sun"></div>
+  <div class="sky__stars" id="stars"></div>
+</div>
+
+<div class="env" id="env">
+  <p class="env__to script" data-t="envTo"></p>
+  <button class="env__body" id="envOpen" type="button">
+    <span class="env__back"></span>
+    <span class="env__letter">
+      <span class="env__names script"><span data-t="groom"></span> &amp; <span data-t="bride"></span></span>
+      <span class="env__date" data-t="heroDate"></span>
+    </span>
+    <span class="env__front"></span>
+    <span class="env__flap"><i></i></span>
+    <span class="env__seal script" id="mono">&amp;</span>
+    <span class="sr" data-t="envHint"></span>
+  </button>
+  <p class="env__hint" data-t="envHint" aria-hidden="true"></p>
+  <div class="env__lang" role="group" aria-label="Тил / Язык">
+    <button type="button" data-lang="kg">Кыргызча</button>
+    <button type="button" data-lang="ru">Русский</button>
+  </div>
+</div>
+
+<div class="chrome">
+  <button class="pill pill--music" id="music" type="button" hidden aria-pressed="false">
+    <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="sr" data-t="musicLabel"></span>
+  </button>
+  <div class="pill pill--lang" role="group" aria-label="Тил / Язык">
+    <button type="button" data-lang="kg">KG</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+</div>
+
+<main class="page" id="page">
+
+  <section class="hero" data-sky="0">
+    <div class="hero__plate" id="plate">
+      <img src="img/hero.webp" width="1080" height="1920" alt="" fetchpriority="high">
+      <canvas class="hero__glints" data-glints></canvas>
+      <div class="hero__glow"></div>
+      <canvas class="hero__flame" data-flame data-lean="-0.5"></canvas>
+    </div>
+    <div class="hero__veil"></div>
+    <div class="hero__text">
+      <p class="kicker" data-t="heroKicker"></p>
+      <h1 class="names script" id="names">
+        <span class="names__amp" aria-hidden="true">&amp;</span>
+        <span class="names__a" data-t="groom"></span>
+        <span class="names__b" data-t="bride"></span>
+      </h1>
+    </div>
+    <div class="hero__foot">
+      <p class="hero__date" data-t="heroDate"></p>
+      <p class="hero__cue"><span class="cue__line"></span><span data-t="scroll"></span></p>
+    </div>
+  </section>
+
+  <section class="paper invite" data-sky="0.2">
+    <svg class="drape drape--top" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">
+      <path class="veil veil--2" d="M0 54V20C50 2 110 40 190 22S330 0 400 18V54Z"/>
+      <path class="veil" d="M0 54V30C70 8 130 50 210 30S340 10 400 28V54Z"/>
+      <path d="M0 54V40C80 20 140 56 220 38S350 22 400 36V54Z"/>
+    </svg>
+    <p class="eyebrow" data-t="greet" data-reveal></p>
+    <p class="body" data-t="body" data-reveal></p>
+    <p class="sign" data-t="sign" data-reveal></p>
+    <p class="couple script" data-reveal>
+      <span data-t="groom"></span>
+      <span class="couple__and" data-t="and"></span>
+      <span data-t="bride"></span>
+    </p>
+    <svg class="drape drape--bottom" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">
+      <path class="veil veil--2" d="M0 54V20C50 2 110 40 190 22S330 0 400 18V54Z"/>
+      <path class="veil" d="M0 54V30C70 8 130 50 210 30S340 10 400 28V54Z"/>
+      <path d="M0 54V40C80 20 140 56 220 38S350 22 400 36V54Z"/>
+    </svg>
+  </section>
+
+  <section class="photos" data-sky="0.42">
+    <figure class="arch arch--main" data-reveal>
+      <img src="img/arch.webp" width="960" height="1280" alt="" loading="lazy">
+    </figure>
+    <div class="photos__pair">
+      <figure class="arch arch--s" data-reveal>
+        <img class="pos-knee" src="img/knee.webp" width="720" height="1280" alt="" loading="lazy">
+      </figure>
+      <figure class="arch arch--s arch--low" data-reveal>
+        <img class="pos-embrace" src="img/embrace.webp" width="720" height="1280" alt="" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <section class="date" data-sky="0.64">
+    <h2 class="title script" data-t="dateTitle" data-reveal></h2>
+    <p class="date__num" data-t="dayNum" data-reveal></p>
+    <p class="date__line" data-t="dateLine" data-reveal></p>
+    <p class="date__time" data-t="timeLine" data-reveal></p>
+    <div class="cal" data-reveal>
+      <p class="cal__month" data-t="month"></p>
+      <div class="cal__grid" id="cal"></div>
+    </div>
+  </section>
+
+  <section class="paper place" data-sky="0.8">
+    <svg class="drape drape--top" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">
+      <path class="veil veil--2" d="M0 54V20C50 2 110 40 190 22S330 0 400 18V54Z"/>
+      <path class="veil" d="M0 54V30C70 8 130 50 210 30S340 10 400 28V54Z"/>
+      <path d="M0 54V40C80 20 140 56 220 38S350 22 400 36V54Z"/>
+    </svg>
+    <h2 class="title script" data-t="placeTitle" data-reveal></h2>
+    <p class="venue" data-t="venue" data-reveal></p>
+    <p class="kind" data-t="venueKind" data-reveal></p>
+    <p class="addr" data-t="addr" data-reveal></p>
+    <a class="btn" id="map" href="#" target="_blank" rel="noopener" data-t="mapBtn" data-reveal></a>
+    <svg class="drape drape--bottom" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">
+      <path class="veil veil--2" d="M0 54V20C50 2 110 40 190 22S330 0 400 18V54Z"/>
+      <path class="veil" d="M0 54V30C70 8 130 50 210 30S340 10 400 28V54Z"/>
+      <path d="M0 54V40C80 20 140 56 220 38S350 22 400 36V54Z"/>
+    </svg>
+  </section>
+
+  <section class="dress" data-sky="0.92">
+    <h2 class="title script" data-t="dressTitle" data-reveal></h2>
+    <p class="dress__text" data-t="dressText" data-reveal></p>
+    <div class="swatches" data-reveal>
+      <div class="swatch swatch--black">
+        <div class="swatch__chip"></div>
+        <p class="swatch__name" data-t="dressBlack"></p>
+      </div>
+      <div class="swatch swatch--orange">
+        <div class="swatch__chip"></div>
+        <p class="swatch__name" data-t="dressOrange"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="count" data-sky="1">
+    <h2 class="title script" data-t="countTitle" data-reveal></h2>
+    <div class="timer" data-reveal>
+      <div class="timer__cell"><b id="tD"></b><span data-t="unit0"></span></div>
+      <div class="timer__cell"><b id="tH"></b><span data-t="unit1"></span></div>
+      <div class="timer__cell"><b id="tM"></b><span data-t="unit2"></span></div>
+      <div class="timer__cell"><b id="tS"></b><span data-t="unit3"></span></div>
+    </div>
+    <p class="bye script" data-t="bye" data-reveal></p>
+    <p class="count__names script" data-reveal><span data-t="groom"></span> &amp; <span data-t="bride"></span></p>
+    <div class="count__glow" aria-hidden="true"></div>
+  </section>
+
+</main>
+
+<canvas class="sparks" id="sparks" aria-hidden="true"></canvas>
+
+<script src="js/content.js"></script>
+<script src="js/flame.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

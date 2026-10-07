@@ -268,15 +268,15 @@ button { font: inherit; color: inherit; }
 
 /* Появление после открытия конверта: имена «прописываются» слева направо */
 .js .hero__text > *, .js .hero__foot > * { opacity: 0; transform: translateY(14px); }
-/* поля с запасом: росчерки Miama далеко выходят за рамку буквы */
-.js .names span { clip-path: inset(-45% 130% -45% -30%); }
+/* поля с запасом: у Miama «в» и «у» выходят за строку больше чем на полкегля — меньший запас срезал завиток «в» */
+.js .names span { clip-path: inset(-120% 130% -120% -30%); }
 /* «&» не режем clip-path: росчерк выходит далеко за свою рамку */
 .js .names .names__amp { clip-path: none; opacity: 0; }
 .is-open .hero__text > *, .is-open .hero__foot > * {
   opacity: 1; transform: none;
   transition: opacity 1.2s ease .2s, transform 1.2s cubic-bezier(.2, .7, .2, 1) .2s;
 }
-.is-open .names span { clip-path: inset(-45% -40% -45% -30%); transition: clip-path 1.5s cubic-bezier(.4, 0, .2, 1) .5s; }
+.is-open .names span { clip-path: inset(-120% -40% -120% -30%); transition: clip-path 1.5s cubic-bezier(.4, 0, .2, 1) .5s; }
 .is-open .names .names__b { transition-delay: 1s; }
 .is-open .names .names__amp { opacity: .36; transition: opacity 2.2s ease 1.2s; }
 .is-open .hero__date { transition-delay: 2.3s; }

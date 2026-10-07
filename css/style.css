@@ -67,8 +67,9 @@ button { font: inherit; color: inherit; }
 
 /* ───────── Небо: фон всей страницы, цвет ведёт main.js по скроллу ───────── */
 
+/* overflow: hidden обязателен: «солнце» шире экрана, и без обрезки браузер Instagram уменьшал всю страницу */
 .sky {
-  position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: 0;
+  position: fixed; left: 0; top: 0; width: 100%; height: 100vh; height: 100lvh; z-index: 0; overflow: hidden;
   background: linear-gradient(180deg, var(--sky-top, #6F7C97) 0%, var(--sky-mid, #C9A29A) 58%, var(--sky-low, #F0B48C) 100%);
 }
 .sky__sun {
@@ -88,7 +89,8 @@ button { font: inherit; color: inherit; }
   z-index: 0; pointer-events: none;
 }
 
-.page { position: relative; z-index: 1; max-width: var(--col); margin: 0 auto; overflow-x: clip; }
+/* hidden — для старых WebKit без clip: края ткани (.drape) шире колонки */
+.page { position: relative; z-index: 1; max-width: var(--col); margin: 0 auto; overflow-x: hidden; overflow-x: clip; }
 
 /* ───────── Конверт ───────── */
 

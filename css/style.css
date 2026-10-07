@@ -241,11 +241,13 @@ button { font: inherit; color: inherit; }
   background: var(--grain); opacity: .22; mix-blend-mode: overlay;
 }
 
-.hero__text { position: absolute; left: 0; right: 0; top: max(6.5vh, 48px); text-align: center; }
-.kicker { font-size: 15px; letter-spacing: .1em; }
+/* «Свадьба» стоит в одном ряду с кнопками музыки и языка (их центр — отступ сверху + 19px),
+   имена опущены ниже: высокая «в» в «Салават» поднимается над строкой и упиралась в подпись */
+.hero__text { position: absolute; left: 0; right: 0; top: calc(max(14px, env(safe-area-inset-top)) + 7px); text-align: center; }
+.kicker { font-size: 15px; line-height: 24px; letter-spacing: .1em; }
 /* Имена по диагонали, за ними большой росчерк «&» (приём сайта-образца) */
 .names {
-  position: relative; isolation: isolate; margin-top: 10px;
+  position: relative; isolation: isolate; margin-top: max(7vh, 52px);
   --fs: min(15.5vw, 72px); line-height: 1;
   text-shadow: 0 2px 30px rgba(42, 7, 13, .5);
 }

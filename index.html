@@ -60,10 +60,13 @@
 
   <section class="hero" data-sky="0">
     <div class="hero__plate" id="plate">
-      <img src="img/hero.webp" width="941" height="1672" alt="" fetchpriority="high">
-      <canvas class="hero__glints" data-glints></canvas>
-      <div class="hero__glow"></div>
-      <canvas class="hero__flame" data-flame data-lean="-0.5"></canvas>
+      <img src="img/hero.webp" width="1350" height="1800" alt="" fetchpriority="high">
+      <!-- Огни на факелах из кадра: --x/--y — фитиль в долях фото, --s — размер (ближе к камере — больше) -->
+      <span class="torch" style="--x: 32.2%; --y: 54.8%; --s: .75"><i class="torch__glow"></i><canvas data-flame></canvas></span>
+      <span class="torch" style="--x: 68.5%; --y: 55.2%; --s: .75"><i class="torch__glow"></i><canvas data-flame></canvas></span>
+      <span class="torch" style="--x: 24.5%; --y: 66.1%; --s: .9"><i class="torch__glow"></i><canvas data-flame></canvas></span>
+      <span class="torch" style="--x: 77.7%; --y: 65.3%; --s: .9"><i class="torch__glow"></i><canvas data-flame></canvas></span>
+      <span class="torch" style="--x: 31.6%; --y: 72.7%; --s: 1.15"><i class="torch__glow"></i><canvas data-flame></canvas></span>
     </div>
     <div class="hero__veil"></div>
     <div class="hero__text">
@@ -110,12 +113,20 @@
         <img src="img/ring.webp" width="800" height="1227" alt="" loading="lazy">
       </figure>
       <figure class="arch arch--s arch--low" data-reveal>
-        <img src="img/arch.webp" width="800" height="1227" alt="" loading="lazy">
+        <img src="img/water.webp" width="800" height="1227" alt="" loading="lazy">
       </figure>
     </div>
     <figure class="arch arch--ring" data-reveal>
       <img src="img/roses.webp" width="900" height="900" alt="" loading="lazy">
     </figure>
+    <div class="photos__pair">
+      <figure class="arch arch--s" data-reveal>
+        <img src="img/knee.webp" width="720" height="1104" alt="" loading="lazy">
+      </figure>
+      <figure class="arch arch--s arch--low" data-reveal>
+        <img src="img/embrace.webp" width="720" height="1104" alt="" loading="lazy">
+      </figure>
+    </div>
   </section>
 
   <section class="date" data-sky="0.64">

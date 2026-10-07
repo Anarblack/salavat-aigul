@@ -76,18 +76,18 @@
     });
   }
 
-  // ── Заглавное фото: «cover» вручную, чтобы пламя и блики стояли на своих местах в кадре ──
+  // ── Заглавное фото: «cover» вручную, чтобы огни стояли на факелах в кадре ──
   const hero = $('.hero');
   const plate = $('#plate');
-  // Низ кадра приподнят на LIFT: факел стоит в самом углу фото и иначе прячется под тканью листа.
-  const LIFT = 28;
+  const plateImg = plate.querySelector('img');
+  const IW = +plateImg.getAttribute('width'), IH = +plateImg.getAttribute('height');
   function layoutPlate() {
-    const W = hero.clientWidth, H = hero.clientHeight - LIFT;
-    const s = Math.max(W / 720, H / 1280);
-    const w = 720 * s, h = 1280 * s;
+    const W = hero.clientWidth, H = hero.clientHeight;
+    const s = Math.max(W / IW, H / IH);
+    const w = IW * s, h = IH * s;
     Object.assign(plate.style, {
       width: `${w}px`, height: `${h}px`,
-      left: `${(W - w) * .8}px`, top: `${H - h}px`,
+      left: `${(W - w) / 2}px`, top: `${H - h}px`,
       right: 'auto', bottom: 'auto',
     });
   }

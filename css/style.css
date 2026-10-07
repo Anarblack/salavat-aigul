@@ -207,8 +207,8 @@ button { font: inherit; color: inherit; }
 
 .hero {
   position: relative; height: 100vh; height: 100svh;
-  /* не ниже полного кадра 9:16 (+28px подъёма, см. LIFT в main.js): имена остаются в небе над головами */
-  min-height: calc(min(100vw, var(--col)) * 1.7778 + 28px);
+  /* не ниже полного кадра 3:4: фото не обрезается сверху, имена остаются в небе над парой */
+  min-height: calc(min(100vw, var(--col)) * 1.3334);
   overflow: hidden; isolation: isolate; background: #1F0509;
 }
 .hero__plate {
@@ -217,22 +217,24 @@ button { font: inherit; color: inherit; }
   animation: drift 26s ease-in-out infinite alternate;
 }
 .hero__plate img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero__glints { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.hero__flame {
-  position: absolute; left: 88.6%; top: 95.6%; width: 22%; height: 20%;
-  transform: translate(-50%, -100%); pointer-events: none;
+/* Пламя рождается на 93% высоты холста (см. Flame в flame.js) — эта точка совмещена с фитилём */
+.torch {
+  position: absolute; left: var(--x); top: var(--y); width: calc(5.5% * var(--s)); aspect-ratio: 2 / 3;
+  transform: translate(-50%, -93%); pointer-events: none;
 }
-.hero__glow {
-  position: absolute; left: 88%; top: 90%; width: 70%; aspect-ratio: 1;
-  transform: translate(-50%, -50%); pointer-events: none;
-  background: radial-gradient(closest-side, rgba(255, 150, 60, .38), rgba(240, 118, 42, .12) 50%, transparent);
+.torch canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+.torch__glow {
+  position: absolute; left: 50%; top: 80%; width: 700%; aspect-ratio: 1; transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(255, 170, 80, .42), rgba(240, 118, 42, .14) 40%, transparent);
   animation: flick 2.8s ease-in-out infinite;
 }
+.torch:nth-of-type(2n) .torch__glow { animation-delay: -1.3s; }
+.torch:nth-of-type(3n) .torch__glow { animation-delay: -2.1s; }
 .hero__veil {
   position: absolute; inset: 0; pointer-events: none;
   background:
     linear-gradient(180deg, rgba(42, 7, 13, .5) 0%, rgba(42, 7, 13, 0) 36%),
-    linear-gradient(0deg, #1F0509 0%, rgba(31, 5, 9, .78) 5%, rgba(31, 5, 9, 0) 27%);
+    linear-gradient(0deg, #1F0509 0%, rgba(31, 5, 9, .8) 6%, rgba(31, 5, 9, .4) 18%, rgba(31, 5, 9, 0) 34%);
 }
 .hero__veil::after {
   content: ''; position: absolute; inset: 0;

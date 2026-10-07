@@ -1,4 +1,4 @@
-// Огонь на canvas: пламя факелов, искры через всю страницу, блики на воде.
+// Огонь на canvas: пламя факелов в кадре и искры через всю страницу.
 // Один requestAnimationFrame на всё; то, что вне экрана, не считается и не рисуется.
 (function () {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -118,29 +118,6 @@
     }
   }
 
-  // Блики на воде: короткие штрихи в двух зонах озера (доли кадра), мимо фигур пары.
-  const LAKE = [[0, .435, .33, .61], [.73, .435, 1, .69]];
-  class Glints extends Layer {
-    step(dt) {
-      while (this.parts.length < 30) {
-        const z = LAKE[Math.random() < .45 ? 0 : 1];
-        const d = Math.random();
-        this.parts.push({ x: rnd(z[0], z[2]) * this.w, y: (z[1] + (z[3] - z[1]) * d) * this.h, len: (.012 + .03 * d) * this.w, life: rnd(.7, 1.9), age: rnd(0, .4) });
-      }
-      this.age(dt);
-    }
-    draw() {
-      const { g, w, h } = this;
-      g.clearRect(0, 0, w, h);
-      g.fillStyle = '#FFE9D4';
-      for (const p of this.parts) {
-        g.globalAlpha = Math.sin(Math.PI * p.age / p.life) * .5;
-        g.fillRect(p.x - p.len / 2, p.y, p.len, 1.3);
-      }
-      g.globalAlpha = 1;
-    }
-  }
-
   const Fire = {
     night: 0,
     init() {
@@ -175,7 +152,6 @@
         return;
       }
 
-      document.querySelectorAll('[data-glints]').forEach((c) => add(c, Glints, true));
       const sparks = document.getElementById('sparks');
       if (sparks) add(sparks, Sparks, false);
 

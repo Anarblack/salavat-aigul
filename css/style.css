@@ -5,6 +5,18 @@
   src: url('../fonts/miamanueva.otf') format('opentype');
   font-display: swap;
 }
+/* Строчная «в» в росчерке — из Great Vibes (© Robert Leuschke, SIL OFL 1.1; файл — подмножество
+   из Google Fonts, только эта буква). У Miama «в» с высоким хвостом-крючком, владелец выбрал эту.
+   Правило объявлено после основного, поэтому для U+0432 браузер берёт его. size-adjust подгоняет
+   рост чаши под строчные Miama; нулевые метрики — чтобы чужая буква не раздвигала строку. */
+@font-face {
+  font-family: 'Miama Nueva';
+  src: url('../fonts/greatvibes-v.woff2') format('woff2');
+  unicode-range: U+0432;
+  size-adjust: 126%;
+  ascent-override: 0%; descent-override: 0%; line-gap-override: 0%;
+  font-display: swap;
+}
 
 :root {
   --wine: #5A0F1C;

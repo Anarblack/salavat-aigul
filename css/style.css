@@ -321,12 +321,12 @@ button { font: inherit; color: inherit; }
   border: 1px solid rgba(243, 233, 220, .7); border-radius: inherit;
 }
 .arch--main { width: 80%; aspect-ratio: 3 / 4.1; border-radius: 50% 50% 0 0 / 36.6% 36.6% 0 0; }
-.arch--main img { object-position: 50% 62%; }
-.photos__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 52px; padding: 0 6px; }
+/* align-items: start — иначе левая арка растягивается по высоте ряда и через aspect-ratio раздувается в ширину */
+.photos__pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 32px; margin-top: 52px; padding: 0 6px; }
 .arch--s { width: 100%; aspect-ratio: 3 / 4.6; border-radius: 50% 50% 0 0 / 32.6% 32.6% 0 0; }
 .arch--low { margin-top: 56px; }
-.pos-knee { object-position: 42% 92%; }
-.pos-embrace { object-position: 38% 96%; }
+/* кольцо на розах — в круглой рамке, как само кольцо */
+.arch--ring { width: 62%; aspect-ratio: 1; margin-top: 64px; border-radius: 50%; }
 
 /* ───────── Дата ───────── */
 

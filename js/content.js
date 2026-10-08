@@ -6,7 +6,7 @@ window.CONTENT = {
   // Luna Garden в 2GIS (ссылку дал владелец)
   mapUrl: 'https://2gis.kg/bishkek/geo/70000001113003711/74.672203,42.688447',
   // Путь к треку, например 'audio/track.mp3'. Пусто — кнопка музыки скрыта.
-  music: 'audio/track.mp3',
+  music: 'audio/raindance.mp3',
   // Буквы на сургучной печати. Пусто — знак &.
   monogram: 'С&А',
 

@@ -25,6 +25,18 @@
   <div class="sky__stars" id="stars"></div>
 </div>
 
+<!-- Рассадка гостей — первый экран в день тоя; данные в js/seating.js -->
+<section class="seat" id="seat" aria-labelledby="seatTitle">
+  <div class="pill pill--lang seat__lang" role="group" aria-label="Тил / Язык">
+    <button type="button" data-lang="kg">KG</button>
+    <button type="button" data-lang="ru">RU</button>
+  </div>
+  <h2 class="seat__title script" id="seatTitle" data-t="seatTitle"></h2>
+  <p class="seat__sub"><span data-t="groom"></span> &amp; <span data-t="bride"></span> · <span data-t="heroDate"></span></p>
+  <div class="seat__grid" id="seatGrid"></div>
+  <div class="seat__bar"><button class="btn seat__go" id="seatGo" type="button" data-t="seatOpen"></button></div>
+</section>
+
 <div class="env" id="env">
   <p class="env__to script" data-t="envTo"></p>
   <button class="env__body" id="envOpen" type="button">
@@ -183,6 +195,7 @@
 <canvas class="sparks" id="sparks" aria-hidden="true"></canvas>
 
 <script src="js/content.js"></script>
+<script src="js/seating.js"></script>
 <script src="js/flame.js"></script>
 <script src="js/main.js"></script>
 </body>

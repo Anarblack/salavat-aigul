@@ -57,6 +57,7 @@
     $$('.cal__dow').forEach((el, i) => { el.textContent = DOW_SHORT[lang][i]; });
     $$('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     document.title = `${t.groom} & ${t.bride} — ${t.title}`;
+    renderSeating(t);
     try { localStorage.setItem('lang', lang); } catch (e) { /* см. initialLang */ }
     measure();
   }
@@ -69,7 +70,7 @@
     const room = names.clientWidth * .92;
     const widest = Math.max(...$$('.names__a, .names__b', names).map((s) => s.offsetWidth));
     if (widest > room) names.style.fontSize = `${base * room / widest}px`;
-    $$('.title, .bye, .env__to').forEach((el) => {
+    $$('.title, .bye, .env__to, .seat__title').forEach((el) => {
       el.style.fontSize = '';
       if (el.scrollWidth <= el.clientWidth) return;
       el.style.fontSize = `${parseFloat(getComputedStyle(el).fontSize) * el.clientWidth / el.scrollWidth}px`;
@@ -209,6 +210,23 @@
       else if (musicBtn.getAttribute('aria-pressed') === 'true') setMusic(true);
     });
   }
+
+  // ── Рассадка: первый экран; «Открыть приглашение» убирает её и показывает конверт ──
+  const seat = $('#seat');
+  const esc = (s) => s.replace(/[&<>"]/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
+  const plural = (n, forms) => forms[n % 10 === 1 && n % 100 !== 11 ? 0 : n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
+  function renderSeating(t) {
+    if (!window.SEATING) return;
+    $('#seatGrid').innerHTML = window.SEATING.tables.map((tb) => `
+      <article class="seat__card">
+        <div class="seat__head"><b>${t.seatTable.replace('{n}', tb.n)}</b><span>${tb.people} ${plural(tb.people, t.seatPeople)}</span></div>
+        <ul>${tb.units.map((u) => (u.length > 1
+          ? `<li class="seat__pair">${esc(u[0])} <i>${t.and} ${esc(u[1])}</i></li>`
+          : `<li>${esc(u[0])}</li>`)).join('')}</ul>
+      </article>`).join('');
+  }
+  if (!window.SEATING) seat.remove();
+  else $('#seatGo').addEventListener('click', () => seat.classList.add('is-hidden'));
 
   // ── Конверт ──
   const env = $('#env');
